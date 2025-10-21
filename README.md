@@ -18,10 +18,10 @@ Esta API recibe patentes vehiculares detectadas por un sistema OCR externo, veri
 
 ## Ejemplos (input/output)
 
-![Imagen 1](images/Screenshot (78).png)
-![Imagen 2](images/Screenshot (79).png)
-![Imagen 3](images/Screenshot (80).png)
-![Imagen 4](images/Screenshot (81).png)
+![Imagen 1](<images/Screenshot%20(78).png>)
+![Imagen 2](<images/Screenshot%20(79).png>)
+![Imagen 3](<images/Screenshot%20(80).png>)
+![Imagen 4](<images/Screenshot%20(81).png>)
 
 ## Requisitos
 
