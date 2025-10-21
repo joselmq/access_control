@@ -16,6 +16,13 @@ Esta API recibe patentes vehiculares detectadas por un sistema OCR externo, veri
 - ✅ Health check endpoint para monitoreo
 - ✅ Manejo profesional de errores
 
+## Ejemplos (input/output)
+
+![Imagen 1](images/Screenshot (78).png)
+![Imagen 2](images/Screenshot (79).png)
+![Imagen 3](images/Screenshot (80).png)
+![Imagen 4](images/Screenshot (81).png)
+
 ## Requisitos
 
 - Python 3.8+
@@ -72,10 +79,41 @@ DATABASE_URL=mysql+pymysql://usuario:password@localhost/control_acceso
 
 ### 6. Crear base de datos
 
-Ejecuta en tu cliente MySQL:
+Ejecuta en tu cliente MySQL (base de datos dummy):
 
 ```sql
-CREATE DATABASE control_acceso CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- Crear base de datos si no existe
+CREATE DATABASE IF NOT EXISTS control_acceso
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+-- Usar la base de datos recién creada
+USE control_acceso;
+
+-- Crear tabla: patentes_autorizadas
+CREATE TABLE IF NOT EXISTS patentes_autorizadas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  patente VARCHAR(10) UNIQUE NOT NULL,
+  nombre_residente VARCHAR(100) NOT NULL,
+  fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Crear tabla: registro_accesos
+CREATE TABLE IF NOT EXISTS registro_accesos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  patente VARCHAR(10) NOT NULL,
+  autorizado BOOLEAN NOT NULL,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX (patente)
+) ENGINE=InnoDB;
+
+-- Insertar datos de ejemplo
+INSERT INTO patentes_autorizadas (patente, nombre_residente)
+VALUES
+  ('BBKL45', 'Juan Pérez'),
+  ('XXYZ99', 'María González'),
+  ('ABCD12', 'Pedro Ramírez');
+
 ```
 
 ### 7. Ejecutar la aplicación
